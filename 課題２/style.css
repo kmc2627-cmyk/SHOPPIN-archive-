@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'KomorebiGothic';
+    src: url('komorebi.ttf');
+}
+
+/* 1. 全体設定：スクロールを許可する */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #fffafa; /* 優しい白ピンク */
+    font-family: 'KomorebiGothic', sans-serif;
+    height: auto;          /* 高さを固定しない */
+    min-height: 100%;
+    overflow-y: auto;      /* 縦スクロールを許可 */
+}
+
+/* 2. 外枠：高さを固定せず、中身に合わせる */
+.container {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    display: none; /* JSで制御 */
+    opacity: 0;
+    flex-direction: column;
+    border-top: 15px solid #f8bbd0;
+    border-bottom: 15px solid #f8bbd0;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100vh;    /* 最低でも画面1枚分 */
+}
+
+/* 3. 各画面の設定 */
+.screen-content {
+    padding: 15px;
+    height: auto;         /* 高さを固定しない */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- ショプノ介エリア（メイン画面用） --- */
+#main-fairy-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    gap: 10px;
+}
+.main-fairy-img {
+    width: 60px;
+    height: auto;
+    animation: fairy-float 3s infinite ease-in-out;
+}
+.main-speech-bubble {
+    position: relative;
+    background: #ffffff;
+    border: 1.5px solid #f8bbd0;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 12px;
+    max-width: 70%;
+}
+.main-speech-bubble:after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    margin-top: -5px;
+    border-left: 8px solid #fff;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+/* 4. ボタン類をスッキリ並べる */
+.category-buttons, .button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.cat-btn, .btn {
+    padding: 10px;
+    background: white;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+.cat-btn:active, .btn:active { transform: translateY(2px); box-shadow: none; }
+.cat-btn.active { background: #f06292; color: white; }
+
+/* 5. 商品確認（履歴）エリア：ここもスクロール制限を解除 */
+#memoList {
+    margin-top: 20px;
+    height: auto;
+    border-top: 1px dashed #f8bbd0;
+    padding-top: 10px;
+}
+.memo-item {
+    background: #fff;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-left: 5px solid #f06292;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-size: 14px;
+}
+
+/* --- その他必要なパーツ --- */
+#splash {
+    position: fixed;    /* 画面に固定 */
+    top: 0;
+    left: 0;
+    width: 100vw;       /* 画面の横幅いっぱい */
+    height: 100vh;      /* 画面の縦幅いっぱい */
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* 縁取りが大きすぎないように調整 */
+    border-top: 10px solid #f8bbd0;
+    border-bottom: 10px solid #f8bbd0;
+    box-sizing: border-box;
+    overflow: hidden;   /* ここだけははみ出し禁止！ */
+}
+.splash-logo {
+    width: 60%;         /* 画面の6割くらいの大きさに */
+    max-width: 250px;   /* 大きくなりすぎない制限 */
+    height: auto;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+.fairy-img { width: 120px; animation: fairy-float 3s infinite ease-in-out; }
+@keyframes fairy-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.big-start-btn { background: #f06292; color: white; border: none; padding: 25px; border-radius: 20px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 6px 15px rgba(240, 98, 146, 0.4); }
+.finish-btn { background: #4fc3f7; color: white; border: none; padding: 12px; border-radius: 10px; width: 100%; margin-bottom: 15px; font-weight: bold; }
+input[type="text"] { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; margin-bottom: 10px; }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SHOPPIN' archive</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="splash">
+        <img src="logo.jpg" alt="ロゴ" class="splash-logo">
+    </div>
+
+    <div class="container" id="main-content">
+        
+        <button type="button" id="home-btn" onclick="goHome()" style="display:none;">🏠</button>
+
+       <div id="start-screen" class="screen-content">
+       <div id="fairy-area" onclick="nextMessage()">
+    <img src="character.jpg" alt="ショプノ介" class="fairy-img">
+    
+    <div class="speech-bubble">
+        <p id="fairy-text">読み込み中...</p>
+        <span class="next-indicator">▼</span>
+    </div>
+</div>
+
+
+    <div class="start-center">
+        <button type="button" class="big-start-btn" onclick="startShopping()">🛍️ お買い物を始める</button>
+        <button type="button" class="archive-view-btn" onclick="toggleArchive()">🏆 過去のベストを見る</button>
+    </div>
+</div>
+
+
+        <div id="shopping-screen" class="screen-content" style="display:none;">
+            <div class="input-area">
+                <button onclick="finishShopping()" class="finish-btn">お買い物を終了してベストを決める</button>
+                
+                <input type="text" id="itemName" placeholder="何の商品を見た？">
+
+                <div class="photo-area">
+                    <input type="file" id="cameraInput" accept="image/*" capture="camera" style="display:none;" onchange="handlePhoto(this)">
+                    <button type="button" class="photo-btn" onclick="triggerCamera()">📷 写真を撮る</button>
+                    <img id="photoPreview" src="" style="display:none;">
+                </div>
+
+                <div class="category-section">
+                    <p>分類：<span id="selectedCategory">未選択</span></p>
+                     <div class="category-buttons">
+    <button type="button" class="cat-btn" onclick="setCategory('コップ類')">☕ コップ</button>
+    <button type="button" class="cat-btn" onclick="setCategory('お皿・食器')">🍽️ 食器</button>
+    <button type="button" class="cat-btn" onclick="setCategory('インテリア')">🏺 家具</button>
+    <button type="button" class="cat-btn" onclick="setCategory('衣類')">👕 衣類</button>
+    <button type="button" class="cat-btn" onclick="setCategory('雑貨')">🧸 雑貨</button>
+    <button type="button" class="cat-btn" onclick="setCategory('その他')">✨ その他</button>
+</div>
+                </div>
+
+                <p>直感で選ぶ！</p>
+                <div id="impressionButtons" class="button-grid">
+                    <p style="color: gray; font-size: 14px;">先に分類を選んでね</p>
+                </div>
+<div id="main-fairy-area">
+    <div class="main-speech-bubble">
+        <p id="main-fairy-text">何にする？</p>
+    </div>
+    <img src="character2.jpg" alt="ショプノ介" class="main-fairy-img">
+</div>
+
+<div id="impressionButtons" class="button-grid">
+    <p style="color: gray; font-size: 14px;">先に分類を選んでね</p>
+</div>
+                <div class="manual-input-area">
+                    <input type="text" id="manualImpression" placeholder="自由に入力...">
+                    <button type="button" id="voiceBtn" onclick="startVoiceInput()">🎙️</button>
+                    <button type="button" id="addManualBtn" onclick="addManualMemo()">追加</button>
+                </div>
+            </div>
+            <div id="memoList" class="scroll-area"></div>
+        </div>
+
+
+      <div class="photo-area">
+    <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(this)">
+    
+   
+    
+    <div id="previewContainer" style="display:none; margin-top:10px; text-align:center;">
+        <p style="font-size: 12px; color: #f06292; margin-bottom: 5px;">▼ 撮影した写真</p>
+        <img id="photoPreview" src="" style="width:100%; max-width:300px; border-radius:15px; border:3px solid #f8bbd0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <button type="button" onclick="resetPhoto()" style="margin-top:5px; background:none; border:none; color:gray; text-decoration:underline; font-size:12px;">撮り直す</button>
+    </div>
+</div>
+
+        <div id="best-select-screen" class="screen-content" style="display:none;">
+            <h2 class="screen-title">今日の一番はどれ？</h2>
+            <div id="candidateList" class="scroll-area"></div>
+            <div id="best-detail-area" style="display:none;">
+                <h3>✨ 詳細を記録</h3>
+                <textarea id="bestDetail" placeholder="決め手や使い心地をメモ..."></textarea>
+                <button onclick="saveBestProduct()" class="save-best-btn">殿堂入り保存！</button>
+            </div>
+        </div>
+
+        <div id="archive-screen" class="screen-content" style="display:none;">
+            <button onclick="toggleArchive()" class="back-btn">← 戻る</button>
+            <h2 class="screen-title">🏆 歴代ベストプロダクト</h2>
+            <div id="bestArchiveList" class="scroll-area"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
